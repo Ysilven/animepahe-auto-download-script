@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Animepahe ·Pahe · Kwik
+// @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
 // @version      0.0.1
 // @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-dowload-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
