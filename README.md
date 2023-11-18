@@ -23,7 +23,7 @@ open anime links in animepahe.(ru|org|com)/anime/ or /play/ using mouse scroll c
 
 ```
 #### Install Tampermonkey First
-#### --- [Install Script to Tampermonkey](https://github.com/Ysilven/animepahe-script/raw/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.user.js) ---
+#### --- [Install Script to Tampermonkey](https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js) ---
 
 
 #### Default Settings
