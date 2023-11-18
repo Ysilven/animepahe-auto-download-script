@@ -5,8 +5,8 @@ compatible with any browser supported by 'Tampermonkey' across devices (Google C
 For mobile, use the 'Kiwi Browser - Playstore' or any browser that supports chrome 'Extensions' or 'Tampermonkey'.
 
 ### Prerequisites
-- 'Google Chrome Browser' or your 'Browser' of choice that supports 'Tampermonkey' Extension.
-- Google Chrome Javascript Extension : [Tampermonkey](https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+ - 'Google Chrome Browser' or your 'Browser' of choice that supports 'Tampermonkey' Extension.
+ - Google Chrome Javascript Extension : [Tampermonkey](https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 
 
 ```
@@ -24,8 +24,11 @@ Info:
 open anime links in animepahe.(ru|org|com)/anime/ or /play/ using mouse scroll click/normal click to open multiple links.
 
 ```
+### Install Tampermonkey First
+#### --- [Install Script to Tampermonkey](https://github.com/Ysilven/animepahe-script/raw/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.user.js) ---
+
 #### Default Settings
-![image](https://github.com/Ysilven/animepahe-script/assets/88947398/734f2aa3-56ef-4605-9bdb-b925bc904fe4)
+[Enable Script · Yes]  [Resolution Entry: 2] [Test Entry] [Subtitle · English] [Resolution Checker · No] [All Links · No] [Expand Menu · No]
 
 ```
 Features:
@@ -35,7 +38,6 @@ Features:
 - [page expire]            fix 'page expire' token issue.
 - [reload 5 seconds]       will reload 'resolution checker' (enabled), if entry resolution is not 'yet' available.
 
-written in javascript for tampermonkey extension. 
 ```
 
 The settings will be saved locally and sync across all tabs. Feel free to modify the source code and submit bug/reports.
