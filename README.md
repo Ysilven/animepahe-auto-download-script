@@ -4,7 +4,7 @@
 compatible with any browser supported by 'Tampermonkey' across devices (Google Chrome · Mozilla Firefox · Safari · Brave etc). 
 For mobile, use the 'Kiwi Browser - Playstore' or any browser that supports chrome 'Extensions' or 'Tampermonkey'.
 
-### Prerequisites
+#### Prerequisites
  - 'Google Chrome Browser' or your 'Browser' of choice that supports 'Tampermonkey' Extension.
  - Google Chrome Javascript Extension : [Tampermonkey](https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 
@@ -24,7 +24,7 @@ Info:
 open anime links in animepahe.(ru|org|com)/anime/ or /play/ using mouse scroll click/normal click to open multiple links.
 
 ```
-### Install Tampermonkey First
+#### Install Tampermonkey First
 #### --- [Install Script to Tampermonkey](https://github.com/Ysilven/animepahe-script/raw/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.user.js) ---
 
 #### Default Settings
