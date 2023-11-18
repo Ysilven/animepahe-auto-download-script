@@ -1,14 +1,14 @@
-# animepahe-auto-script - tampermonkey javascript
+# Animepahe-Auto-Script :
 compatible with any browsers. across devices. (recommended chrome browsers)
 for mobile (use kiwi browser)
 
-prerequisite:
+# Prerequisite :
 chrome browser or your browser of choice. 
 tampermonkey extension. 
 
 auto-download anime single episodes (use mouse scroll click to open multiple anime links). 
 
-features: 
+# Features :
 enable script:
 enable/disable animepahe site only. will not proceed to download. (test mode)
 
