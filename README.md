@@ -1,5 +1,5 @@
 ### [ Animepahe Auto Download Script ]
-> This script is not a (batch downloader) written in 'Javascript' but automation for ['Animepahe'](https://animepahe.com). 
+> This script is not a (batch downloader) but automation for ['Animepahe'](https://animepahe.com) written in 'Javascript'. 
 compatible with any browser supported by 'Tampermonkey' across devices (Google Chrome · Mozilla Firefox · Safari · Brave etc). 
 For mobile, use the 'Kiwi Browser - Playstore' or any browser that supports chrome 'Extensions' or 'Tampermonkey'.
 
