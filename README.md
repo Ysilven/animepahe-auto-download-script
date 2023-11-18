@@ -1,20 +1,20 @@
-### Animepahe Auto Download Script
+### [ Animepahe Auto Download Script ]
 > This script is not a (batch downloader) written in 'Javascript' but automation for ['Animepahe'](https://animepahe.com). 
 compatible with any browser supported by 'Tampermonkey' across devices (Google Chrome · Mozilla Firefox · Safari · Brave etc). 
 For mobile, use the 'Kiwi Browser - Playstore' or any browser that supports chrome 'Extensions' or 'Tampermonkey'.
 
-### Prerequisites
+### [ Prerequisites ]
 - 'Google Chrome Browser' or your 'Browser' of choice that supports 'Tampermonkey' Extension.
 - Google Chrome Javascript Extension : [Tampermonkey](https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 
-### Usage
+### [ Usage ]
 - Select your anime episodes to download.
 - Script 'menu' and settings available at the top page.
 - Settings will be locally saved in 'Browser'. (not in incognito mode)
 - Use mouse scroll click to open multiple anime links. animepahe.(ru|org|com)/anime/xxx etc.
 - disable script in 'menu' to try 'Test Entry' available in animepahe.(ru|org|com)/play/xxx/xxx. download entry will highlight.
 
-### Features
+### [ Features ]
 
 ##### Enable Script
   - Enable/Disable on 'Animepahe site' only. will not proceed to download (test mode).
@@ -37,7 +37,7 @@ For mobile, use the 'Kiwi Browser - Playstore' or any browser that supports chro
 ##### Script Menu
   - Available at the top button 'menu' animepahe.(ru|org|com) paths supported - /play/ /anime/ /?page=xxx
 
-### Additional Features
+### [ Additional Features ]
 
 ##### Auto Resolution Sub/Dub
   - Adjust based on the available anime entry. (Download fallback feature)
