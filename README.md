@@ -16,7 +16,7 @@ Usage:
 - [enable script]          enable/disable script 'animepahe' site only.
 - [resolution entry]       1 · 360p, 2 · 720p, 3 · 1080p. min value (1) max value (15). absolute by entry order.
 - [test entry]             test 'resolution entry' and will highlight the value in entry.
-- [subtitle·english]         switch to subtitle english · dubbed english only. 
+- [subtitle·english]       switch to subtitle english · dubbed english only. 
 - [resolution checker]     lock to selected 'resolution entry' 1 to 3 only.
 - [all links]              unlock all links (by absolute order of resolution entry value).
 
@@ -42,4 +42,4 @@ Features:
 
 The settings will be saved locally and sync across all tabs. Feel free to modify the source code and submit bug/reports.
 
-created by: [Arjien PHC](https://phcorner.net/members/arjien.1773652/) intended for public use and PHCorner users.
+created by: [Arjien PHC](https://phcorner.net/members/arjien.1773652/) intended for PHCorner users and public users.
