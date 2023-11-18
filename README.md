@@ -41,3 +41,5 @@ Features:
 ```
 
 The settings will be saved locally and sync across all tabs. Feel free to modify the source code and submit bug/reports.
+
+created by: [Arjien PHC](https://phcorner.net/members/arjien.1773652/) intended for public use and PHCorner users.
