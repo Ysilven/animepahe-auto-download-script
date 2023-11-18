@@ -1,9 +1,8 @@
 ### Animepahe Auto Download Script
-```
-This script is not a (batch downloader), it's automation for animepahe.(ru|org|com) written in javascript. 
+
+> This script is not a (batch downloader), it's automation for animepahe.(ru|org|com) written in javascript. 
 compatible with any browser supported by 'Tampermonkey' across devices (Google Chrome · Mozilla Firefox · Safari · Brave etc). 
 For mobile, use the 'Kiwi Browser - Playstore' or any browser that supports chrome 'Extensions' or 'Tampermonkey'.
-```
 
 ### Prerequisites
 - 'Google Chrome Browser' or your 'Browser' of choice that supports 'Tampermonkey' Extension.
