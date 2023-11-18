@@ -1,11 +1,9 @@
 ### Animepahe Auto Download Script
 
-> This script is not a (batch downloader), it's automation for animepahe.(ru|org|com) written in javascript. 
-compatible with any browser supported by 'Tampermonkey' across devices (Google Chrome · Mozilla Firefox · Safari · Brave etc). 
-For mobile, use the 'Kiwi Browser - Playstore' or any browser that supports chrome 'Extensions' or 'Tampermonkey'.
+> This is a JavaScript automation script for animepahe.(ru|org|com), not a batch downloader. It’s compatible with any Tampermonkey-supported browser (e.g., Chrome, Firefox, Safari, Brave) on all devices. For mobile, use a browser like Kiwi Browser that supports Chrome extensions for Tampermonkey.
 
 #### Prerequisites
- - 'Google Chrome Browser' or your 'Browser' of choice that supports 'Tampermonkey' Extension.
+ - Use Google Chrome or any browser of your choice that supports the Tampermonkey extension.
  - Google Chrome Javascript Extension : [Tampermonkey](https://chrome.google.com/webstore/detail/dhdgffkkebhmkfjojejmpbldmpobfkfo)
 
 
@@ -26,6 +24,7 @@ open anime links in animepahe.(ru|org|com)/anime/ or /play/ using mouse scroll c
 ```
 #### Install Tampermonkey First
 #### --- [Install Script to Tampermonkey](https://github.com/Ysilven/animepahe-script/raw/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.user.js) ---
+
 
 #### Default Settings
 [Enable Script · Yes]  [Resolution Entry: 2] [Test Entry] [Subtitle · English] [Resolution Checker · No] [All Links · No] [Expand Menu · No]
