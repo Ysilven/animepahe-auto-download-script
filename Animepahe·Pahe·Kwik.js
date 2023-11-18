@@ -2,8 +2,8 @@
 // @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
 // @version      0.0.1
-// @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-dowload-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
-// @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-dowload-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
+// @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%C2%B7Pahe%C2%B7Kwik.js
+// @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%C2%B7Pahe%C2%B7Kwik.js
 // @description  animepahe auto script. use mouse scroll click to open multiple anime links.
 // @author       Arjien Ysilven
 // @match        https://pahe.win/*
