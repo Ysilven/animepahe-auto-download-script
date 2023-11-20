@@ -2,7 +2,7 @@
 
 > This is a JavaScript automation script for animepahe.(ru|org|com), not a batch downloader. It’s compatible with any Tampermonkey-supported browser (e.g., Chrome, Firefox, Safari, Brave) on all devices. For mobile, use a browser like Kiwi Browser that supports Chrome extensions for Tampermonkey.
 
-> can automate multiple download links simultaneously.
+> automate multiple download links simultaneously.
 
 
 #### Prerequisites
