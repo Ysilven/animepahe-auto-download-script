@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
-// @version      0.0.1
+// @version      0.0.2
 // @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @description  animepahe auto script. use mouse scroll click to open multiple anime links.
@@ -18,11 +18,11 @@
 
 (function() {
     'use strict';
+
     let settings = load_settings();
     let enable·script = settings['Enable·Script'] ? true : false;
 
     let url_link = window.location.href;
-    console.clear();
     switch (true) {
         case /animepahe\.(ru|org|com)\/?$/.test(url_link):
             menu(1);
@@ -35,7 +35,7 @@
             if(enable·script){
                 script();
             }else{
-             console.log('script disabled');
+                console.log('script disabled');
             }
             break;
         case /animepahe\.(ru|org|com)\/anime\/.+/.test(url_link):
@@ -57,211 +57,153 @@
     }
 
     function script(){
+        console.clear();
+        console.log('Animepahe · Pahe · Kwik ', 'v0.0.2');
         let settings = load_settings();
-        let res = settings['Resolution·Value'];
-        let sub·dub = settings['Subtitle·Dubbed'] ? true : false;
-        let res·checker = settings['Resolution·Checker'] ? true : false;
-        let all·links = settings['All·Links'] ? true : false;
-        let enable·script = settings['Enable·Script'] ? true : false;
+        let index = settings['Resolution·Value'];
+        let sub_dub = settings['Subtitle·Dubbed'] ? true : false;
+        let resolution_checker = settings['Resolution·Checker'] ? true : false;
+        let all_links = settings['All·Links'] ? true : false;
+        let enable_script = settings['Enable·Script'] ? true : false;
 
-        let links = [];
-        let links_res;
-        console.log ('res value: '+res);
+        let a = document.getElementById('pickDownload');
+        let b = a.querySelectorAll('a');
+        let links = Array.from(b).map((link, index) => {
+            return {
+                index: index + 1,
+                href: link.href,
+                text: link.textContent
+            };
+        });
+        console.log('resolution·index:', index);
 
-        let expand_menu = document.getElementById('downloadMenu');
-        if (expand_menu.getAttribute('aria-expanded') == 'false') {
-            expand_menu.click();
-        }
+        let text = ['eng'];
+        let sub = links.filter(link => {
+            return !text.some(text => link.text.includes(text));
+        });
 
-        let menu = document.getElementById('pickDownload');
-        let entry = menu.getElementsByTagName('a');
-        for (let i = 0; i < entry.length; i++) {
-            let link = entry[i].href;
-            let content = entry[i].textContent;
-            links.push(i + 1 +' · '+ link +' · '+ content);
-        }
-
-        function get_links_condition(links, condition) {
-            return links.filter(link => condition(link));
-        }
-
-        let sub_text_array = [" eng"];
-        let dub_text_array_eng = [" eng"];
-        function link_contains_text(link, include) {
-            if (sub·dub){
-                return sub_text_array.some(text => link.includes(text)) ^ !include;
-            }else{
-                return dub_text_array_eng.some(text => link.includes(text)) ^ !include;
-            }
-        }
-
-        function get_links_filter(links, filter) {
-            return links.filter(link => link.includes(filter)).map(link => link.split(' · ')[1]);
-        }
-
-        function get_links_res(links, resolution) {
-            if (resolution.length > 0){
-                for (let i = 0; i < links.length; i++) {
-                    let link = links[i].split(' · ')[1];
-                    if (resolution.includes(link)) {
-                        res = i + 1;
-                        break;
-                    }
-                }
-            }
-            return res;
-        }
-
-        let sub_links = get_links_condition(links, link => link_contains_text(link, false));
-        let dub_links = get_links_condition(links, link => link_contains_text(link, true));
+        let dub = links.filter(link => {
+            return text.some(text => link.text.includes(text));
+        });
 
         let resolutions = {1: '360p', 2: '720p', 3: '1080p'};
-        let res_checker = (sub·dub ? sub_links : dub_links).some(link => link.includes(resolutions[res]));
-
-        if (res > 3){
-            play();
-        }else{
-            if (res·checker){
+        let res_checker = (sub_dub ? sub : dub).some(link => link.text.includes(resolutions[index]));
+        if (resolution_checker){
+            if (index > 3 || all_links) {
+                play();
+            }else{
                 if (res_checker){
-                    console.log('res·checker: '+res+' · '+resolutions[res]+' · found.');
+                    console.log(`resolution·checker: ${resolutions[index]} · found.`);
                     play();
                 }else{
-                    console.log('res·checker: '+res+' · '+resolutions[res]+' · not found.');
-                    console.log('5 seconds reload();')
+                    console.log(`resolution·checker: ${resolutions[index]} · not found.`);
+                    console.log('5 seconds reload.')
                     setInterval(() => window.location.reload(), 5000);
                 }
-            }else{
-                play();
             }
+        }else{
+            play();
         }
 
         function play(){
-            let entry;
-            if (!(all·links)){
-                if (sub·dub){
-                    entry = sub_links.length;
-                }else{
-                    entry = dub_links.length;
-                }
-            }else{
-                entry = links.length;
-            }
-            if (!(all·links)){
-                if (sub·dub){
-                    console.log ('sub links length: '+ sub_links.length);
-                    let sub_links_720p = get_links_filter(sub_links, '720p');
-                    let sub_links_1080p = get_links_filter(sub_links, '1080p');
-                    auto_resolution(sub_links, sub_links_720p, sub_links_1080p);
-                    console.log ("auto·res.sub");
-                }else{
-                    let dub_links_720p = get_links_filter(dub_links, '720p');
-                    let dub_links_1080p = get_links_filter(dub_links, '1080p');
-                    auto_resolution(dub_links, dub_links_720p, dub_links_720p);
-                    console.log ("auto·res.dub");
-                }
-            }else{
-                if (res > entry){
-                    res = entry;
-                }
+            let expand_menu = document.getElementById('downloadMenu');
+            if (expand_menu.getAttribute('aria-expanded') == 'false') {
+                expand_menu.click();
             }
 
-            function auto_resolution(sub·dub·links, link·720p, link·1080p) {
-                if (entry == 1 || res <= 0){
-                    res = 1;
+            function filter(array, resolution) {
+                return array.filter(link => link.text.includes(resolution));
+            }
+
+            let count = sub_dub ? sub.length : dub.length;
+            if (!all_links){
+                let type = sub_dub ? sub : dub;
+                let _720p = filter(type, '720p');
+                let _1080p = filter(type, '1080p');
+                if (count == 1 || index <= 0){
+                    index = 1;
                 }
-                if (res == 2 & entry == 2){
-                    if (link·720p.length > 0){
-                        res = get_links_res(sub·dub·links, link·720p);
+                if (index == 2 & count == 2){
+                    if (_720p.length > 0){
+                        index = _720p[0].index;
                     }else{
-                        if (link·1080p.length > 0){
-                            res = get_links_res(sub·dub·links, link·1080p);
+                        if (_1080p.length > 0){
+                            index = _1080p[0].index;
                         }else{
-                            res = 1
+                            index = 1;
                         }
                     }
                 }
-                if (res == 3 & entry == 2){
-                    res = 2;
+                if (index == 3 & count == 2){
+                    index = 2;
                 }
-                if (res > entry){
-                    res = entry;
-                }
-            }
-
-            function get_links_entry(links, res) {
-                let link = links.filter(link => link.startsWith(res + ' · ')).map(link => link.split(' · ')[1]);
-                return link.length > 0 ? link[0] : null;
-            }
-
-            let link_res;
-            const sub_count = sub_links.length;
-            if (!(all·links)){
-                if (sub·dub){
-                    link_res = get_links_entry(sub_links, res);
-                }else{
-                    link_res = get_links_entry(dub_links, res + sub_count);
+                if (index > count){
+                    index = count;
                 }
             }else{
-                link_res = get_links_entry(links, res);
+                if (index > links.length){
+                    index = links.length;
+                }
             }
 
-            if (link_res == null){
-                console.log('var res = value? · '+ res+ ' · not found.');
-                let dropdown = document.getElementById('pickDownload');
-                let drop_item = dropdown.getElementsByTagName('a');
+            let index_link, info;
+            let type = sub_dub ? sub : dub;
+            let data = !all_links ? type : links;
+            if (data.length > 0) {
+                index_link = data[index-1].href;
+                info = data[index-1].index +' · '+ data[index-1].href +' · '+ data[index-1].text;
+                console.log(!all_links ? 'auto·resolution: ' + (sub_dub ? 'sub · count: ' + sub.length : 'dub · count: ' + dub.length) : 'all·links · count: ' + links.length);
+            } else {
+                index_link = null;
+            }
 
-                for (let i = 0; i < drop_item.length; i++) {
-                    drop_item[i].style.backgroundColor = '';
-                    drop_item[i].style.color = '';
+            function clear_selection(){
+                let a = document.getElementById('pickDownload');
+                let b = a.getElementsByTagName('a');
+
+                for (let i = 0; i < b.length; i++) {
+                    b[i].style.backgroundColor = '';
+                    b[i].style.color = '';
                 }
+            }
+
+            if (index_link == null){
+                console.log('resolution = value? · '+ index + ' · not found.');
+                clear_selection();
             }else{
-                let exact_link = links.find(link => link.includes(link_res));
-                let link_number = exact_link.split(' · ')[0];
-                let dropdown = document.getElementById('pickDownload');
-                let drop_item = dropdown.getElementsByTagName('a');
-
-                for (let i = 0; i < drop_item.length; i++) {
-                    drop_item[i].style.backgroundColor = '';
-                    drop_item[i].style.color = '';
-                }
-
-                let download = dropdown.getElementsByTagName('a')[link_number-1];
-                download.style.backgroundColor = '#505050';
-                download.style.color = 'white';
-
-                console.log(exact_link);
-
-                if (enable·script){
-                    window.location = link_res;
+                clear_selection();
+                let a = document.getElementById('pickDownload');
+                let select = a.getElementsByTagName('a')[info[0]-1];
+                select.style.backgroundColor = '#505050';
+                select.style.color = 'white';
+                console.log(info);
+                if (enable_script){
+                    window.location = index_link;
+                    console.log(index_link);
                 }else{
-                    console.log('enable script: no');
+                    console.log('enable·script: false');
                 }
             }
         }
     }
 
     function menu(type){
-        var li = document.createElement("li");
-        li.className = "nav-item";
+        let li = Object.assign(document.createElement('li'), {className: 'nav-item'}),
+            a = Object.assign(li.appendChild(document.createElement('a')), {
+                className: 'nav-link',
+                textContent: 'menu',
+                title: 'Menu',
+                onclick: function(e) {
+                    e.preventDefault();
+                    open_menu();
+                }
+            });
 
-        var a = document.createElement("a");
-        a.className = "nav-link";
-        a.textContent = "menu";
-        a.title = "Animepahe · Pahe · Kwik";
-
-        a.addEventListener("click", function(event) {
-            event.preventDefault();
-            open_menu();
-        });
-
-        li.appendChild(a);
-        var navbar = document.querySelector(".navbar-nav.mr-auto.main-nav");
-
-        navbar.appendChild(li);
+        document.querySelector('.navbar-nav.mr-auto.main-nav').appendChild(li);
         create_menu();
 
-        var mediaQuery = window.matchMedia("(max-width: 1100px)");
-        function togglePadding(e) {
+        var media = window.matchMedia("(max-width: 1100px)");
+        function toggle(e) {
             var menu = document.getElementById('settings_menu');
             if (e.matches) {
                 menu.style.paddingLeft = '10px';
@@ -269,29 +211,21 @@
                 menu.style.paddingLeft = '0px';
             }
         }
-        togglePadding(mediaQuery);
-        mediaQuery.addListener(togglePadding);
+        toggle(media);
+        media.addListener(toggle);
 
         let initialSettings = load_settings();
-        let expand·menu = initialSettings['Expand·Menu'] ? true : false;
-        if (expand·menu){
+        if (initialSettings['Expand·Menu']) {
             open_menu();
         }
 
-        document.addEventListener('visibilitychange', function() {
-            let settings = load_settings();
-            let menu = document.getElementById('settings_menu');
-            if (document.hidden){
-
-            }else{
-                menu.remove();
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                document.getElementById('settings_menu').remove();
                 create_menu();
-
-                let initialSettings = load_settings();
-                let expand·menu = initialSettings['Expand·Menu'] ? true : false;
-                if (expand·menu){
-                    open_menu();
-                }
+                if (load_settings()['Expand·Menu']) open_menu();
+                toggle(media);
+                media.addListener(toggle);
             }
         });
 
@@ -369,23 +303,15 @@
                 let initialSettings = load_settings();
                 let currentValue = Number(input.value);
                 if (currentValue > 1) {
-                    currentValue -= 1;
-                    input.value = currentValue;
+                    input.value = --currentValue;
                     initialSettings['Resolution·Value'] = currentValue;
                     save_settings(initialSettings);
-                } else {
-                    input.value = 1;
-                    initialSettings['Resolution·Value'] = 1;
-                    save_settings(initialSettings);
-                }
-                if (!initialSettings['All·Links']){
-                    if (currentValue > 3) {
-                        if (menu.contains(resolution_checker)){
-                            menu.removeChild(resolution_checker);
-                        }
-                    } else {
+                    if (!initialSettings['All·Links'] && currentValue <= 3) {
                         menu.insertBefore(resolution_checker, menu.children[6]);
                     }
+                }
+                if (!initialSettings['All·Links'] && currentValue > 3 && menu.contains(resolution_checker)) {
+                    menu.removeChild(resolution_checker);
                 }
             });
 
@@ -393,82 +319,53 @@
                 let initialSettings = load_settings();
                 let currentValue = Number(input.value);
                 if (currentValue < 15) {
-                    currentValue++;
-                    input.value = currentValue;
+                    input.value = ++currentValue;
                     initialSettings['Resolution·Value'] = currentValue;
                     save_settings(initialSettings);
-                }
-
-                if (!initialSettings['All·Links']){
-                    if (currentValue > 3) {
-                        if (menu.contains(resolution_checker)){
-                            menu.removeChild(resolution_checker);
-                        }
-                    } else {
+                    if (!initialSettings['All·Links'] && currentValue <= 3) {
                         menu.insertBefore(resolution_checker, menu.children[6]);
                     }
                 }
+                if (!initialSettings['All·Links'] && currentValue > 3 && menu.contains(resolution_checker)) {
+                    menu.removeChild(resolution_checker);
+                }
             });
 
-            all_links.addEventListener('click', function() {
+            all_links.addEventListener('click', () => {
                 let initialSettings = load_settings();
-                if (initialSettings['All·Links']){
+                if (initialSettings['All·Links']) {
                     menu.removeChild(subtitle_dubbed);
-                    if (menu.contains(resolution_checker)){
-                        menu.removeChild(resolution_checker);
-                    }
-                }else{
+                    if (menu.contains(resolution_checker)) menu.removeChild(resolution_checker);
+                } else {
                     menu.insertBefore(subtitle_dubbed, menu.children[5]);
-                    if (Number(input.value) > 3) {
-                        if (menu.contains(resolution_checker)){
-                            menu.removeChild(resolution_checker);
-                        }
-                    } else {
-                        menu.insertBefore(resolution_checker, menu.children[6]);
-                    }
+                    if (Number(input.value) <= 3) menu.insertBefore(resolution_checker, menu.children[6]);
+                    else if (menu.contains(resolution_checker)) menu.removeChild(resolution_checker);
                 }
             });
 
-            test_entry.addEventListener('click', function() {
-                if (/animepahe\.(ru|org|com)\/play\/.+\/.+/.test(url_link)){
+            test_entry.addEventListener('click', () => {
+                if (/animepahe\.(ru|org|com)\/play\/.+\/.+/.test(url_link)) {
                     script();
-                    setTimeout(function() {
-                        var menu = document.getElementById('downloadMenu');
-                        if (menu.getAttribute('aria-expanded') == 'false') {
-                            menu.click();
-                        }
-                    }, 0);
-                }else{
+                    setTimeout(() => document.getElementById('downloadMenu').click(), 0);
+                } else {
                     console.log('test entry: only available at animepahe.(ru|org|com)/play/xxx');
                 }
             });
 
-            if (!initialSettings['Resolution·Value'] > 3){
-                menu.insertBefore(resolution_checker, menu.children[6]);
-            }
-
             let all·links = initialSettings['All·Links'] ? true : false;
-            if (all·links){
+            let resolution_value = initialSettings['Resolution·Value'] > 3;
+            if (!resolution_value) menu.insertBefore(resolution_checker, menu.children[6]);
+
+            if (all·links) {
                 menu.removeChild(subtitle_dubbed);
-                if (menu.contains(resolution_checker)){
-                    menu.removeChild(resolution_checker);
-                }
-            }else{
+                if (menu.contains(resolution_checker)) menu.removeChild(resolution_checker);
+            } else {
                 menu.insertBefore(subtitle_dubbed, menu.children[5]);
-                if (!initialSettings['Resolution·Value'] > 3){
-                    menu.insertBefore(resolution_checker, menu.children[6]);
-                }
+                if (!resolution_value) menu.insertBefore(resolution_checker, menu.children[6]);
             }
 
-            if (Number(input.value) > 3) {
-                if (menu.contains(resolution_checker)){
-                    menu.removeChild(resolution_checker);
-                }
-            } else {
-                if (!initialSettings['Resolution·Value'] > 3){
-                    menu.insertBefore(resolution_checker, menu.children[6]);
-                }
-            }
+            if (Number(input.value) > 3 && menu.contains(resolution_checker)) menu.removeChild(resolution_checker);
+            else if (!resolution_value) menu.insertBefore(resolution_checker, menu.children[6]);
 
             let main = document.querySelector('.content-wrapper');
             if (type == 1){
@@ -492,7 +389,6 @@
                 button.style.cursor = 'pointer';
                 button.style.transition = 'all 0.3s ease';
                 button.style.cursor = 'default';
-                button.classname = 'episode-list row';
                 button.style.fontSize = '12px';
                 button.style.height = '35px';
                 button.onmouseover = function() {
