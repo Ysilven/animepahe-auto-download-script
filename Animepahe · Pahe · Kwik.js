@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
-// @version      0.0.2
+// @version      0.0.1
 // @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @description  animepahe auto script. use mouse scroll click to open multiple anime links.
@@ -58,7 +58,7 @@
 
     function script(){
         console.clear();
-        console.log('Animepahe · Pahe · Kwik ', 'v0.0.2');
+        console.log('Animepahe · Pahe · Kwik', 'v0.0.2');
         let settings = load_settings();
         let index = settings['Resolution·Value'];
         let sub_dub = settings['Subtitle·Dubbed'] ? true : false;
@@ -356,6 +356,9 @@
             let resolution_value = initialSettings['Resolution·Value'] > 3;
             if (!resolution_value) menu.insertBefore(resolution_checker, menu.children[6]);
 
+            if (Number(input.value) > 3 && menu.contains(resolution_checker)) menu.removeChild(resolution_checker);
+            else if (!resolution_value) menu.insertBefore(resolution_checker, menu.children[6]);
+
             if (all·links) {
                 menu.removeChild(subtitle_dubbed);
                 if (menu.contains(resolution_checker)) menu.removeChild(resolution_checker);
@@ -363,9 +366,6 @@
                 menu.insertBefore(subtitle_dubbed, menu.children[5]);
                 if (!resolution_value) menu.insertBefore(resolution_checker, menu.children[6]);
             }
-
-            if (Number(input.value) > 3 && menu.contains(resolution_checker)) menu.removeChild(resolution_checker);
-            else if (!resolution_value) menu.insertBefore(resolution_checker, menu.children[6]);
 
             let main = document.querySelector('.content-wrapper');
             if (type == 1){
