@@ -1,8 +1,8 @@
 ### Animepahe Auto Download Script
 
-> This is a JavaScript automation script for animepahe.(ru|org|com), not a batch downloader. It’s compatible with any Tampermonkey-supported browser (e.g., Chrome, Firefox, Safari, Brave) on all devices. For mobile, use a browser like Kiwi Browser that supports Chrome extensions for Tampermonkey.
+> Introducing a JavaScript automation script designed for animepahe.(ru·org·com). This script doesn't function as a batch downloader but excels in automating multiple links with its rich feature set. It seamlessly integrates with any browser that supports Tampermonkey, including popular options like Chrome, Firefox, Safari, and Brave. For mobile users, a browser like Kiwi Browser, which supports Chrome extensions for Tampermonkey, is recommended.
 
-#### Status: Currently Working
+#### Status: Currently Working - v.0.0.3
 
 #### Prerequisites
  - Use Google Chrome or any browser of your choice that supports the Tampermonkey extension.
@@ -20,8 +20,8 @@ Usage:
 - [resolution checker]     lock to selected 'resolution entry' 1 to 3 only.
 - [all links]              unlock all links (by absolute order of resolution entry value).
 
-Info:
-open anime links in animepahe.(ru|org|com)/anime/ or /play/ using mouse scroll click/normal click to open multiple links.
+How to use:
+open anime links in animepahe.(ru·org·com)/anime/ or /play/ using mouse scroll click/normal click to open multiple links.
 
 ```
 #### Install Tampermonkey Script from Url
@@ -46,4 +46,4 @@ Features:
 
 The settings will be saved locally and sync across all tabs. Feel free to modify the source code and submit bug/reports.
 
-Created By: [Arjien-PHC](https://phcorner.net/members/arjien.1773652/) intended for public users.
+Author: [Arjien-PHC](https://phcorner.net/members/arjien.1773652/) intended for all users.
