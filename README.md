@@ -36,7 +36,7 @@ https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/An
 
 ```
 Features:
-- [automation]               automate multiple download links simultaneosly.
+- [automation]             automate multiple download links simultaneosly.
 - [auto resolution]        fallback feature for anime with limited resolution selections.
 - [complete bypass]        completely bypass waiting time. v.0.0.3
 - [page expire]            fix 'page expire' token issue.
