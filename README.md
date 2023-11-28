@@ -2,8 +2,6 @@
 
 > This is a JavaScript automation script for animepahe.(ru|org|com), not a batch downloader. It’s compatible with any Tampermonkey-supported browser (e.g., Chrome, Firefox, Safari, Brave) on all devices. For mobile, use a browser like Kiwi Browser that supports Chrome extensions for Tampermonkey.
 
-> automate multiple download links simultaneously.
-
 > status: currently working. script version: v.0.0.3
 
 #### Prerequisites
@@ -38,7 +36,7 @@ https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/An
 
 ```
 Features:
-
+- [automation]               automate multiple download links simultaneosly.
 - [auto resolution]        fallback feature for anime with limited resolution selections.
 - [complete bypass]        completely bypass waiting time. v.0.0.3
 - [page expire]            fix 'page expire' token issue.
