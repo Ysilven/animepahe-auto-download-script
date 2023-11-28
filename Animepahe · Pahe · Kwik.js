@@ -474,7 +474,7 @@
         return urls;
     }
 
-    let isProcessing = false;
+    var isProcessing = false;
     function pahe_win(link) {
         if (isProcessing) return;
         isProcessing = true;
