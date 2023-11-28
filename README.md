@@ -4,6 +4,7 @@
 
 > automate multiple download links simultaneously.
 
+> animepahe script version: v.0.0.3
 
 #### Prerequisites
  - Use Google Chrome or any browser of your choice that supports the Tampermonkey extension.
