@@ -63,7 +63,7 @@
     }
 
     function script(){
-        console.log('Animepahe · Pahe · Kwik', 'v0.0.4');
+        console.log('Animepahe · Pahe · Kwik', 'v0.1.1');
 
         let settings = load_settings();
         let index = settings['Resolution·Value'];
