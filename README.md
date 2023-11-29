@@ -12,9 +12,9 @@
 ```
 Usage:
 
-- [menu]                   located at the top webpage of 'animepahe' paths supported /play/ /anime/ /page?=xxx.
+- [menu]                   located at the top of webpage 'animepahe' paths supported /play/ /anime/ /page?=xxx.
 - [enable script]          enable/disable script 'animepahe' site only.
-- [resolution entry]       1 · 360p, 2 · 720p, 3 · 1080p. min value (1) max value (15). absolute by entry order.
+- [resolution entry]       1 · 360p, 2 · 720p, 3 · 1080p. min (1) max (15). by entry order.
 - [test entry]             test 'resolution entry' and will highlight the value in entry.
 - [subtitle·english]       switch to subtitle english · dubbed english only. 
 - [resolution checker]     lock to selected 'resolution entry' 1 to 3 only.
