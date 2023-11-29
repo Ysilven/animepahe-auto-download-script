@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
-// @version      0.0.3
+// @version      0.1.1
 // @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @description  animepahe auto script. use mouse scroll click to open multiple anime links.
@@ -63,8 +63,7 @@
     }
 
     function script(){
-        console.clear();
-        console.log('Animepahe · Pahe · Kwik', 'v0.0.3');
+        console.log('Animepahe · Pahe · Kwik', 'v0.0.4');
 
         let settings = load_settings();
         let index = settings['Resolution·Value'];
@@ -110,7 +109,7 @@
                     play();
                 }else{
                     console.log(`resolution·checker: ${resolutions[index]} · not found.`);
-                    console.log('5 seconds reload.')
+                    console.log('5 seconds reload.');
                     clear_selection();
                     setTimeout(() => window.location.reload(), 5000);
                 }
@@ -235,6 +234,7 @@
             let input = document.createElement('input');
             let plus = document.createElement('button');
             let test_entry = document.createElement('button');
+            let info = document.createElement('input');
             let subtitle_dubbed = document.createElement('button');
             let resolution_checker = document.createElement('button');
             let all_links = document.createElement('button');
@@ -244,14 +244,15 @@
                 let settings = load_settings();
                 element.innerText = settings[json_value] ? yes : no;
                 element.onclick = function() {
-                    settings[json_value] = !settings[json_value];
-                    element.innerText = settings[json_value] ? yes : no;
-                    save_settings(settings);
+                    let settings_ = load_settings();
+                    settings_[json_value] = !settings_[json_value];
+                    element.innerText = settings_[json_value] ? yes : no;
+                    save_settings(settings_);
                 };
             }
 
             settings(enable_script, 'Enable·Script', 'Enable Script · Yes', 'Enable Script · No');
-            settings(subtitle_dubbed, 'Subtitle·Dubbed', 'Subtitle · English', 'Dubbed · English');
+            settings(subtitle_dubbed, 'Subtitle·Dubbed', 'Sub · English', 'Dub · English');
             settings(resolution_checker, 'Resolution·Checker', 'Resolution Checker · Yes', 'Resolution Checker · No');
             settings(all_links, 'All·Links', 'All Links · Yes', 'All Links · No');
             settings(expand_menu, 'Expand·Menu', 'Expand Menu · Yes', 'Expand Menu · No');
@@ -274,6 +275,44 @@
             input.style.fontSize = '12px';
             input.style.margin = '2px 2px 0px -3px';
 
+            info.readOnly = true;
+            function info_input(){
+                let settings = load_settings();
+                if (!settings['All·Links']){
+                    menu.insertBefore(info, menu.children[5]);
+                }
+                switch (settings['Resolution·Value']) {
+                    case 1:
+                        info.value = '360p';
+                        break;
+                    case 2:
+                        info.value = '720p';
+                        break;
+                    case 3:
+                        info.value = '1080p';
+                        break;
+                    default:
+                        info.value = '';
+                        if(menu.contains(info)){
+                            menu.removeChild(info);
+                        }
+                        if(menu.contains(resolution_checker)){
+                            menu.removeChild(resolution_checker);
+                        }
+                        break;
+                }
+            }
+            info.id = 'info_input';
+            info.style.border = 'none';
+            info.style.background = '#151515';
+            info.style.borderRadius = '2px';
+            info.style.color = '#FFF';
+            info.style.width = '50px';
+            info.style.height = '35px';
+            info.style.textAlign = 'center';
+            info.style.fontSize = '12px';
+            info.style.margin = '0px 5px 0px 0px';
+
             menu.id = 'settings_menu';
             menu.style.display = 'none';
             menu.style.backgroundColor = '#000';
@@ -286,6 +325,7 @@
             menu.appendChild(input);
             menu.appendChild(plus);
             menu.appendChild(test_entry);
+            menu.appendChild(info);
             menu.appendChild(subtitle_dubbed);
             menu.appendChild(resolution_checker);
             menu.appendChild(all_links);
@@ -298,13 +338,8 @@
                     input.value = --currentValue;
                     initialSettings['Resolution·Value'] = currentValue;
                     save_settings(initialSettings);
-                    if (!initialSettings['All·Links'] && currentValue <= 3) {
-                        menu.insertBefore(resolution_checker, menu.children[6]);
-                    }
                 }
-                if (!initialSettings['All·Links'] && currentValue > 3 && menu.contains(resolution_checker)) {
-                    menu.removeChild(resolution_checker);
-                }
+                update_display();
             });
 
             plus.addEventListener('click', function() {
@@ -314,30 +349,17 @@
                     input.value = ++currentValue;
                     initialSettings['Resolution·Value'] = currentValue;
                     save_settings(initialSettings);
-                    if (!initialSettings['All·Links'] && currentValue <= 3) {
-                        menu.insertBefore(resolution_checker, menu.children[6]);
-                    }
                 }
-                if (!initialSettings['All·Links'] && currentValue > 3 && menu.contains(resolution_checker)) {
-                    menu.removeChild(resolution_checker);
-                }
+                update_display();
+            });
+
+            resolution_checker.addEventListener('click', () => {
+                let initialSettings = load_settings();
+                if (initialSettings['Resolution·Checker']? info.style.backgroundColor = '#202020' : info.style.backgroundColor = '#101010');
             });
 
             all_links.addEventListener('click', () => {
-                let initialSettings = load_settings();
-                if (initialSettings['All·Links']) {
-                    menu.removeChild(subtitle_dubbed);
-                    if (menu.contains(resolution_checker)) {
-                        menu.removeChild(resolution_checker);
-                    }
-                } else {
-                    menu.insertBefore(subtitle_dubbed, menu.children[5]);
-                    if (Number(input.value) <= 3) {
-                        menu.insertBefore(resolution_checker, menu.children[6]);
-                    } else if (menu.contains(resolution_checker)) {
-                        menu.removeChild(resolution_checker);
-                    }
-                }
+                update_display();
             });
 
             test_entry.addEventListener('click', () => {
@@ -349,29 +371,29 @@
                 }
             });
 
-            let all·links = initialSettings['All·Links'] ? true : false;
-            let resolution·value = initialSettings['Resolution·Value'] > 3;
-            if (!resolution·value) {
-                menu.insertBefore(resolution_checker, menu.children[6]);
-            }
-
-            if (Number(input.value) > 3 && menu.contains(resolution_checker)) {
-                menu.removeChild(resolution_checker);
-            } else if (!resolution·value) {
-                menu.insertBefore(resolution_checker, menu.children[6]);
-            }
-
-            if (all·links) {
-                menu.removeChild(subtitle_dubbed);
-                if (menu.contains(resolution_checker)) {
-                    menu.removeChild(resolution_checker);
-                }
-            } else {
-                menu.insertBefore(subtitle_dubbed, menu.children[5]);
-                if (!resolution·value) {
+            function update_display(){
+                let initialSettings = load_settings();
+                if (initialSettings['Resolution·Checker']? info.style.backgroundColor = '#202020' : info.style.backgroundColor = '#101010');
+                if (!initialSettings['Resolution·Value'] > 3){
                     menu.insertBefore(resolution_checker, menu.children[6]);
                 }
+                if (initialSettings['All·Links']) {
+                    if (menu.contains(info)) {
+                        menu.removeChild(info);
+                        menu.removeChild(subtitle_dubbed);
+                        menu.removeChild(resolution_checker);
+                    }
+                } else {
+                    menu.insertBefore(subtitle_dubbed, menu.children[5]);
+                    if (Number(input.value) <= 3) {
+                        menu.insertBefore(resolution_checker, menu.children[6]);
+                    } else if (menu.contains(resolution_checker)) {
+                        menu.removeChild(resolution_checker);
+                    }
+                }
+                info_input();
             }
+            update_display();
 
             let main = document.querySelector('.content-wrapper');
             if (type == 1){
@@ -455,6 +477,7 @@
     async function process_link(link){
         let url = link;
         let urls = [];
+        console.log('fetching link: kwik.cx');
         try {
             let response = await fetch(url);
             let html = await response.text();
