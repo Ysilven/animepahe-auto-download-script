@@ -38,7 +38,7 @@ https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/An
 Features:
 - [automation]             automate multiple download links simultaneously.
 - [auto resolution]        fallback feature for anime with limited resolution selections.
-- [complete bypass]        completely bypass waiting time. (v.0.0.3)
+- [complete bypass]        completely bypass waiting time.
 - [page expire]            fix 'page expire' token issue.
 - [reload 5 seconds]       'resolution checker · yes'. useful for updating anime/live anime updates when resolution value ex.'720p' is not yet available.
 
