@@ -40,7 +40,7 @@ Features:
 - [auto resolution]        fallback feature for anime with limited resolution selections.
 - [complete bypass]        completely bypass waiting time. (v.0.0.3)
 - [page expire]            fix 'page expire' token issue.
-- [reload 5 seconds]       will reload 'resolution checker' (enabled), if entry resolution is not 'yet' available.
+- [reload 5 seconds]       will reload 'resolution checker' (enabled), if entry resolution is not 'yet' available. (useful for updating anime/live anime update when resolution '720p' is not yet available)
 
 ```
 
