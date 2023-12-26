@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
-// @version      0.1.1
+// @version      0.1.2
 // @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @description  animepahe auto script. use mouse scroll click to open multiple anime links.
@@ -39,7 +39,7 @@
             menu(2);
             break;
         case /pahe\.win\/.+/.test(url_link):
-            pahe_win(url_link);
+            pahe_win();
             break;
         case /kwik\.cx\/f\/.+/.test(url_link):
             kwik_cx();
@@ -177,7 +177,11 @@
                 select.style.color = 'white';
                 console.log(info);
 
-                pahe_win(index_link);
+                if (enable_script){
+                    window.location = index_link;
+                }else{
+                    console.log('enable script: no');
+                }
             }
         }
     }
@@ -474,47 +478,14 @@
         localStorage.setItem('settings', JSON.stringify(settings));
     }
 
-    async function process_link(link){
-        let url = link;
-        let urls = [];
-        console.log('fetching link: kwik.cx');
-        try {
-            let response = await fetch(url);
-            let html = await response.text();
-            let parser = new DOMParser();
-            let doc = parser.parseFromString(html, 'text/html');
-            let links = doc.getElementsByTagName('a');
-            for(let i = 0; i < links.length; i++) {
-                let url = links[i].href;
-                if(url.includes('kwik.cx')) {
-                    urls.push(url);
-                }
-            }
-        } catch(err) {
+    function pahe_win() {
+        const content = document.querySelector('script').textContent;
+        const link = content.match(/https?:\/\/[^'"]+/);
+        if (link) {
+            window.location = link[0];
+        } else {
             setInterval(() => window.location.reload(), 3000);
         }
-        console.log(urls[0]);
-        return urls;
-    }
-
-    var isProcessing = false;
-    function pahe_win(link) {
-        if (isProcessing) return;
-        isProcessing = true;
-        process_link(link).then(urls => {
-            isProcessing = false;
-            if(urls.length > 0) {
-                let settings = load_settings();
-                let enable_script = settings['Enable·Script'] ? true : false;
-                if (enable_script){
-                    window.location = urls[0];
-                }else{
-                    console.log('enable·script: false');
-                }
-            } else {
-                setInterval(() => window.location.reload(), 3000);
-            }
-        });
     }
 
     function kwik_cx() {
