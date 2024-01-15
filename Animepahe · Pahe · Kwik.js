@@ -44,13 +44,13 @@
             pahe_win();
             break;
         case /kwik\.(si|cx)\/f\/.+/.test(url_link):
-        kwik_si();
-        break;
-    case /kwik\.(si|cx)\/d\/.+/.test(url_link): {
-        let newUrlLink = url_link.replace('/d/', '/f/');
-        window.location = newUrlLink;
-        break;
-    }
+            kwik_si();
+            break;
+        case /kwik\.(si|cx)\/d\/.+/.test(url_link): {
+            let newUrlLink = url_link.replace('/d/', '/f/');
+            window.location = newUrlLink;
+            break;
+        }
         default:
             console.log('no matches found for url_link');
     }
