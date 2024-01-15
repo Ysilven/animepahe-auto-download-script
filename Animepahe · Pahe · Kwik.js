@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
-// @version      0.1.2
+// @version      0.1.3
 // @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @description  animepahe auto script. use mouse scroll click to open multiple anime links.
 // @author       Arjien Ysilven
 // @match        https://pahe.win/*
-// @match        https://kwik.cx/f/*
-// @match        https://kwik.cx/d/*
+// @match        https://kwik.si/f/*
+// @match        https://kwik.si/d/*
 // @match        https://animepahe.ru/*
 // @match        https://animepahe.org/*
 // @match        https://animepahe.com/*
@@ -41,10 +41,10 @@
         case /pahe\.win\/.+/.test(url_link):
             pahe_win();
             break;
-        case /kwik\.cx\/f\/.+/.test(url_link):
-            kwik_cx();
+        case /kwik\.si\/f\/.+/.test(url_link):
+            kwik_si();
             break;
-        case /kwik\.cx\/d\/.+/.test(url_link): {
+        case /kwik\.si\/d\/.+/.test(url_link): {
             let newUrlLink = url_link.replace('/d/', '/f/');
             window.location = newUrlLink;
             break;
@@ -488,7 +488,7 @@
         }
     }
 
-    function kwik_cx() {
+    function kwik_si() {
         const form = document.querySelector('form');
         if (form) {
             form.submit();
