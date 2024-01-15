@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Animepahe · Pahe · Kwik
 // @namespace    https://PHCorner.net/
-// @version      0.1.4
+// @version      0.1.5
 // @downloadURL  https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @updateURL    https://raw.githubusercontent.com/Ysilven/animepahe-auto-download-script/main/Animepahe%20%C2%B7%20Pahe%20%C2%B7%20Kwik.js
 // @description  animepahe auto script. use mouse scroll click to open multiple anime links.
@@ -44,7 +44,7 @@
             pahe_win();
             break;
         case /kwik\.(si|cx)\/f\/.+/.test(url_link):
-            kwik_si();
+            kwik();
             break;
         case /kwik\.(si|cx)\/d\/.+/.test(url_link): {
             let newUrlLink = url_link.replace('/d/', '/f/');
@@ -180,7 +180,7 @@
                 console.log(info);
 
                 if (enable_script){
-                    window.location = index_link;
+                    pahe_win_x(index_link);
                 }else{
                     console.log('enable script: no');
                 }
@@ -490,7 +490,60 @@
         }
     }
 
-    function kwik_si() {
+    async function process_link(link) {
+        try {
+            console.log('fetching link: kwik');
+            let response = await fetch(link + '/i');
+            if (response.redirected) {
+                let url = response.url;
+                if (url.includes('https://kwik.')) {
+                    let prefix = url.match(/https:\/\/kwik\.[a-z]+\//);
+                    if (prefix) {
+                        let split = url.split(prefix[0])[1];
+                        return prefix[0] + split;
+                    }
+                }
+            }
+        } catch (error) {
+            console.error('Error fetching link: kwik', error);
+        }
+    }
+
+    var isProcessing = false;
+    var retryCount = 0;
+    const maxRetries = 3;
+    async function pahe_win_x(link) {
+        if (isProcessing) return;
+        isProcessing = true;
+        try {
+            let url = await process_link(link);
+            if (url) {
+                let settings = load_settings();
+                let enable_script = settings['Enable·Script'] ? true : false;
+
+                if (enable_script) {
+                    console.log(url);
+                    window.location = url;
+                } else {
+                    console.log('enable·script: false');
+                }
+            } else {
+                if (retryCount < maxRetries) {
+                    retryCount++;
+                    setTimeout(() => pahe_win_x(link), 1000);
+                } else {
+                    console.log('Maximum retries reached: Loading Url');
+                    window.location = link;
+                }
+            }
+        } catch (error) {
+            setInterval(() => window.location.reload(), 3000)
+        } finally {
+            isProcessing = false;
+        }
+    }
+
+    function kwik() {
         const form = document.querySelector('form');
         if (form) {
             form.submit();
